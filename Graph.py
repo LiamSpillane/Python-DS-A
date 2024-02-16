@@ -1,7 +1,7 @@
 from collections import deque
 
 class Graph:
-    def __init__(self, size, directed=True):
+    def __init__(self, size: int, directed=True):
         self.size = size
         self.directed = directed
         self.adjMatrix = [[-1] * size for _ in range(size)]
@@ -9,12 +9,12 @@ class Graph:
         self.verticesList = [0] * size
 
     # sets
-    def set_vertex(self, v, id):
+    def set_vertex(self, v: int, id: str):
         if 0 <= v <= self.size:
             self.vertices[id] = v
             self.verticesList[v] = id
 
-    def set_edge(self, frm, to, weight=0):
+    def set_edge(self, frm: str, to: str, weight=0):
         frm = self.vertices[frm]
         to = self.vertices[to]
 
@@ -24,13 +24,13 @@ class Graph:
             self.adjMatrix[to][frm] = weight
 
     # gets
-    def get_matrix(self):
+    def get_matrix(self) -> list[list[int]]:
         return self.adjMatrix
 
-    def get_vertices(self):
+    def get_vertices(self) -> list:
         return self.verticesList
 
-    def get_edges(self):
+    def get_edges(self) -> list[tuple]:
         edges = []
         for i in range(self.size):
             for j in range(self.size):
@@ -39,12 +39,12 @@ class Graph:
         return edges
     
     # traversals
-    def dfs(self, start):
+    def dfs(self, start: str) -> list[int]:
         visited = [False] * self.size
         start = self.vertices[start]
         l = []
 
-        def visit(start):
+        def visit(start: int):
             nonlocal visited, l
             if visited[start]:
                 return
@@ -57,7 +57,7 @@ class Graph:
         visit(start)
         return l
 
-    def bfs(self, start):
+    def bfs(self, start: str) -> list[int]:
         visited = [False] * self.size
         start = self.vertices[start]
         l, q = [], deque()
