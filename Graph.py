@@ -18,6 +18,7 @@ class Graph:
         frm = self.vertices[frm]
         to = self.vertices[to]
 
+        # assign edge(s)
         self.adjMatrix[frm][to] = weight
         if not self.directed:
             self.adjMatrix[to][frm] = weight
@@ -45,17 +46,14 @@ class Graph:
 
         def visit(start):
             nonlocal visited, l
-            
             if visited[start]:
                 return
-
             l.append(start)
             visited[start] = True
             for v in range(self.size):
                 if self.adjMatrix[start][v] != -1 and not visited[v]:
                     visit(v)
             return
-        
         visit(start)
         return l
 
@@ -63,18 +61,15 @@ class Graph:
         visited = [False] * self.size
         start = self.vertices[start]
         l, q = [], deque()
-
         q.append(start)
         visited[start] = True
         while q:
             start = q.popleft()
             l.append(start)
-
             for i in range(self.size):
                 if self.adjMatrix[start][i] != -1 and not visited[i]:
                     q.append(i)
                     visited[i] = True
-
         return l
 
 # def main():
